@@ -186,7 +186,7 @@ public class PelotaLogics {
         for (int i = 0; i < trailPositions.size; i++) {
             float alpha = (float) (i + 1) / trailPositions.size;
             Color c = pelota.getSprite().getColor();
-            shapeRenderer.setColor(c.r, c.g, c.b, 0.25f);
+            shapeRenderer.setColor(c.r, c.g, c.b, alpha);
             Vector2 pos = trailPositions.get(i);
             float size = 8f;
             shapeRenderer.rect(pos.x - size / 2f, pos.y - size / 2f, size, size);
