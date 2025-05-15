@@ -1,5 +1,6 @@
 package com.mygdx.pong.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,7 +27,10 @@ public class Pala {
         sprite.draw(batch);
     }
 
-    public void dispose() {
-        sprite.getTexture().dispose();
+    public Sprite getSprite() {
+        return sprite;
     }
+
+    public void setColor(Color c) { sprite.setColor(c); }
+    public Color getColor() { return sprite.getColor(); }
 }

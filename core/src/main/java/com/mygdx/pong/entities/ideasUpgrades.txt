@@ -2,8 +2,8 @@
 - Modo espejo
 - Campo rápido/lento
 - Bola sin fricción
--
+- Pala ancha
 
 ***OTROS***
 - Cada 10 toques consecutivos irá cambiando el color de la pelota/campo/palas y la velocidad (hasta un máximo de 100)
-- 
+-

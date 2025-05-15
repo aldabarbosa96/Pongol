@@ -1,6 +1,6 @@
-// core/src/com/mygdx/pong/entities/Pelota.java
 package com.mygdx.pong.entities;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +14,6 @@ public class Pelota {
     public Pelota(Texture texture, float x, float y, float width, float height) {
         sprite = new Sprite(texture);
         sprite.setSize(width, height);
-        // Ajusta el origen al centro para que rote correctamente
         sprite.setOrigin(width / 2f, height / 2f);
         sprite.setPosition(x, y);
         hitbox = new Circle(sprite.getX() + sprite.getOriginX(), sprite.getY() + sprite.getOriginY(), Math.min(width, height) / 2f);
@@ -42,7 +41,7 @@ public class Pelota {
     }
 
     // Rota la sprite y actualiza el hitbox
-    public void rotate(float degrees) {
+    public void rotate(float degrees) { // todo --> valorar si hacemos que rote en un futuro
         sprite.rotate(degrees);
         updateHitbox();
     }
@@ -57,8 +56,14 @@ public class Pelota {
         hitbox.setPosition(cx, cy);
         hitbox.setRadius(Math.min(sprite.getWidth(), sprite.getHeight()) / 2f);
     }
+    public Texture getTexture() {
+        return sprite.getTexture();
+    }
 
-    public void dispose() {
-        sprite.getTexture().dispose();
+    public void setColor(Color c) { sprite.setColor(c); }
+    public Color getColor() { return sprite.getColor(); }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }
