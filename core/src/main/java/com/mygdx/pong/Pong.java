@@ -185,6 +185,8 @@ public class Pong extends ApplicationAdapter {
         float innerH = H - 2 * MARGIN_RECT;
 
         // Marco y color loco
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         float lineWidth = flash ? 4f : 2f;
         Gdx.gl.glLineWidth(lineWidth);
         shapeRenderer.setProjectionMatrix(camera.combined);
@@ -203,7 +205,7 @@ public class Pong extends ApplicationAdapter {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.WHITE);
         float areaW = innerW * 0.55f;
-        float areaH = innerH * 0.135f;
+        float areaH = innerH * 0.175f;
         float areaX = MARGIN_RECT + (innerW - areaW) / 2f;
         shapeRenderer.rect(areaX, MARGIN_RECT, areaW, areaH);
         shapeRenderer.rect(areaX, MARGIN_RECT + innerH - areaH, areaW, areaH);
