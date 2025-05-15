@@ -238,6 +238,11 @@ public class Pong extends ApplicationAdapter {
         shapeRenderer.circle(W / 2f, H / 2f, 7.5f, 16);
         shapeRenderer.end();
 
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        for (PelotaLogics pl : balls) {
+            pl.renderTrail(shapeRenderer);
+        }
+
         // Sprites, upgrades y marcadores
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
