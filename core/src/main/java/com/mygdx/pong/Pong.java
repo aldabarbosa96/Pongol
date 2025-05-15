@@ -44,6 +44,7 @@ public class Pong extends ApplicationAdapter {
     private PalaLogics bottomLogic, topLogic;
     private Marcadores marcadores;
     private UpgradeManager upgradeManager;
+    private boolean gamePaused = false;
 
     private boolean countdown = true;
     private int countdownNumber = 3;
@@ -122,7 +123,7 @@ public class Pong extends ApplicationAdapter {
 
     @Override
     public void render() {
-        float delta = Gdx.graphics.getDeltaTime();
+        float delta = gamePaused ? 0f : Gdx.graphics.getDeltaTime();
 
         // Cuenta atrás inicial
         if (countdown) {
@@ -265,6 +266,10 @@ public class Pong extends ApplicationAdapter {
 
     public Marcadores getMarcadores() {
         return marcadores;
+    }
+
+    public void setPaused(boolean paused) {
+        this.gamePaused = paused;
     }
 
     @Override
