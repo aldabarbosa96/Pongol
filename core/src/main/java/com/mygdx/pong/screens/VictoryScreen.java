@@ -28,35 +28,35 @@ public class VictoryScreen implements Screen {
     private float padding = 20f;
 
     public VictoryScreen(Game game, int bottomScore, int topScore) {
-        this.game        = game;
+        this.game = game;
         this.bottomScore = bottomScore;
-        this.topScore    = topScore;
+        this.topScore = topScore;
 
         // Determinamos los mensajes de cada jugador
         if (bottomScore > topScore) {
             bottomMessage = "¡GANASTE!";
-            topMessage    = "PERDISTE";
+            topMessage = "PERDISTE";
         } else if (topScore > bottomScore) {
             bottomMessage = "PERDISTE";
-            topMessage    = "¡GANASTE!";
+            topMessage = "¡GANASTE!";
         } else {
             bottomMessage = "EMPATE";
-            topMessage    = "EMPATE";
+            topMessage = "EMPATE";
         }
         scoreText = bottomScore + "  :  " + topScore;
 
-        batch         = new SpriteBatch();
+        batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
         // Cargamos la fuente
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal("font1.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        param.size  = 64;
+        param.size = 64;
         param.color = Color.WHITE;
         font = gen.generateFont(param);
         gen.dispose();
 
-        layout       = new GlyphLayout();
+        layout = new GlyphLayout();
         buttonBounds = new Rectangle();
 
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -82,13 +82,13 @@ public class VictoryScreen implements Screen {
         // Mensaje
         layout.setText(font, bottomMessage);
         float bx = (w - layout.width) / 2f;
-        float by = h / 4f + layout.height / 2f;
+        float by = h / 3f + layout.height / 2f;
         font.draw(batch, layout, bx, by);
 
         // Puntuación
         layout.setText(font, scoreText);
         float sx = (w - layout.width) / 2f;
-        float sy = h / 4f - layout.height / 2f;
+        float sy = h / 3f - layout.height * 5 / 2f;
         font.draw(batch, layout, sx, sy);
 
         batch.end();
@@ -107,13 +107,13 @@ public class VictoryScreen implements Screen {
         // Mensaje
         layout.setText(font, topMessage);
         float tx = (w - layout.width) / 2f;
-        float ty = h / 4f + layout.height / 2f;  // coincide con by antes de rotar
+        float ty = h / 3f + layout.height / 2f;  // coincide con by antes de rotar
         font.draw(batch, layout, tx, ty);
 
         // Puntuación
         layout.setText(font, scoreText);
         float ux = (w - layout.width) / 2f;
-        float uy = h / 4f - layout.height / 2f;  // coincide con sy antes de rotar
+        float uy = h / 3f - layout.height * 5 / 2f;  // coincide con sy antes de rotar
         font.draw(batch, layout, ux, uy);
         batch.end();
 
@@ -127,12 +127,7 @@ public class VictoryScreen implements Screen {
 
         batch.begin();
         layout.setText(font, buttonText);
-        font.draw(
-            batch,
-            layout,
-            buttonBounds.x + padding,
-            buttonBounds.y + padding + layout.height
-        );
+        font.draw(batch, layout, buttonBounds.x + padding, buttonBounds.y + padding + layout.height);
         batch.end();
 
         // Detectar toque en el botón
@@ -153,17 +148,24 @@ public class VictoryScreen implements Screen {
         float bw = layout.width + padding * 2;
         float bh = layout.height + padding * 2;
         // Colocamos el botón centrado horizontal y a 10% desde abajo
-        buttonBounds.set(
-            width / 2f - bw / 2f,
-            height * 0.10f,
-            bw, bh
-        );
+        buttonBounds.set(width / 2f - bw / 2f, height * 0.10f, bw, bh);
     }
 
-    @Override public void show() {}
-    @Override public void pause() {}
-    @Override public void resume() {}
-    @Override public void hide() {}
+    @Override
+    public void show() {
+    }
+
+    @Override
+    public void pause() {
+    }
+
+    @Override
+    public void resume() {
+    }
+
+    @Override
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

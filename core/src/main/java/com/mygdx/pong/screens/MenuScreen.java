@@ -13,15 +13,21 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * Pantalla de menú principal con opciones para jugar o salir.
+ */
 public class MenuScreen implements Screen {
     private final Game game;
     private SpriteBatch batch;
     private BitmapFont font;
     private GlyphLayout layout;
     private Rectangle playButtonBounds;
+    private Rectangle exitButtonBounds;
     private ShapeRenderer shapeRenderer;
-    private String buttonText = "JUGAR";
+    private String playButtonText = "JUGAR";
+    private String exitButtonText = "SALIR";
     private float padding = 20f;
+    private float spacing = 40f; // Separación entre botones
 
     public MenuScreen(Game game) {
         this.game = game;
@@ -37,6 +43,7 @@ public class MenuScreen implements Screen {
 
         layout = new GlyphLayout();
         playButtonBounds = new Rectangle();
+        exitButtonBounds = new Rectangle();
         shapeRenderer = new ShapeRenderer();
 
         resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -44,38 +51,68 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // 1) limpia pantalla
+        // 1) Limpiar pantalla
         Gdx.gl.glClearColor(0, 0, 0, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // 2) dibujamos contorno del botón
+        // 2) Dibujar botón JUGAR
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(playButtonBounds.x, playButtonBounds.y, playButtonBounds.width, playButtonBounds.height);
         shapeRenderer.end();
 
-        // 3) dibuja el texto centrado dentro del botón
         batch.begin();
-        font.draw(batch, layout, playButtonBounds.x + padding, playButtonBounds.y + padding + layout.height);
+        layout.setText(font, playButtonText);
+        // Centrar texto en el botón
+        float playTextX = playButtonBounds.x + (playButtonBounds.width - layout.width) / 2f;
+        float playTextY = playButtonBounds.y + (playButtonBounds.height + layout.height) / 2f;
+        font.draw(batch, layout, playTextX, playTextY);
         batch.end();
 
-        // 4) manejo de inputTouch
+        // 3) Dibujar botón SALIR debajo
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.rect(exitButtonBounds.x, exitButtonBounds.y, exitButtonBounds.width, exitButtonBounds.height);
+        shapeRenderer.end();
+
+        batch.begin();
+        layout.setText(font, exitButtonText);
+        // Centrar texto en el botón SALIR
+        float exitTextX = exitButtonBounds.x + (exitButtonBounds.width - layout.width) / 2f;
+        float exitTextY = exitButtonBounds.y + (exitButtonBounds.height + layout.height) / 2f;
+        font.draw(batch, layout, exitTextX, exitTextY);
+        batch.end();
+
+        // 4) Manejo de input táctil
         if (Gdx.input.justTouched()) {
             Vector3 touch = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            // Ajuste de coordenada Y
             touch.y = Gdx.graphics.getHeight() - touch.y;
+
             if (playButtonBounds.contains(touch.x, touch.y)) {
+                // Iniciar juego
                 game.setScreen(new PongScreen(game));
                 dispose();
+            } else if (exitButtonBounds.contains(touch.x, touch.y)) {
+                // Salir de la app
+                Gdx.app.exit();
             }
         }
     }
 
     @Override
     public void resize(int width, int height) {
-        layout.setText(font, buttonText);
+        // Calcula tamaño y posición de botones centrados
+        layout.setText(font, playButtonText);
         float btnW = layout.width + padding * 2;
         float btnH = layout.height + padding * 2;
-        playButtonBounds.set(width / 2f - btnW / 2f, height / 2f - btnH / 2f, btnW, btnH);
+        float centerX = width / 2f - btnW / 2f;
+        float playY = height / 2f - btnH / 2f;
+
+        playButtonBounds.set(centerX, playY, btnW, btnH);
+        // Posicionar SALIR debajo de JUGAR con spacing adicional
+        float exitY = playY - btnH - spacing;
+        exitButtonBounds.set(centerX, exitY, btnW, btnH);
     }
 
     @Override

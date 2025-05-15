@@ -21,9 +21,9 @@ public class PalaLogics {
 
 
     public PalaLogics(Pala pala, boolean isBottom, Camera camera) {
-        this.pala        = pala;
-        this.isBottom    = isBottom;
-        this.camera      = camera;
+        this.pala = pala;
+        this.isBottom = isBottom;
+        this.camera = camera;
         this.defaultWidth = pala.getBounds().width;
         this.defaultColor = new Color(pala.getColor());
     }
@@ -71,10 +71,12 @@ public class PalaLogics {
         }
     }
 
-    /** Agranda la pala durante <duration> segundos */
+    /**
+     * Agranda la pala durante <duration> segundos
+     */
     public void enlargePaddle(float factor, float duration, Color color) {
         pala.getSprite().setSize(defaultWidth * factor, pala.getBounds().height);
-        widthTimer  = duration;
+        widthTimer = duration;
         setTemporaryColor(color, duration);
     }
 
