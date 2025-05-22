@@ -22,7 +22,7 @@ public class PongScreen implements Screen {
     private final Game game;
     private final Pong pong;
     private boolean paused;
-    private boolean pauseFromTop;  // ¿quién pausó?
+    private boolean pauseFromTop; 
 
     private final Rectangle pauseButtonBR = new Rectangle();
     private final Rectangle pauseButtonTL = new Rectangle();
@@ -147,7 +147,7 @@ public class PongScreen implements Screen {
     private void drawPauseOverlay() {
         int w = Gdx.graphics.getWidth(), h = Gdx.graphics.getHeight();
 
-        // UI matrix girada si pausó arriba
+        // UI matrix girada si pausó el jugadord e arriba
         Matrix4 mtx = new Matrix4(uiMatrix);
         if (pauseFromTop) {
             mtx.translate(w / 2f, h / 2f, 0);

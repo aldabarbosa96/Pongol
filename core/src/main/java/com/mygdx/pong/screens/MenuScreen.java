@@ -13,9 +13,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-/**
- * Pantalla de menú principal con opciones para jugar o salir.
- */
 public class MenuScreen implements Screen {
     private final Game game;
     private SpriteBatch batch;
@@ -27,7 +24,7 @@ public class MenuScreen implements Screen {
     private String playButtonText = "JUGAR";
     private String exitButtonText = "SALIR";
     private float padding = 20f;
-    private float spacing = 40f; // Separación entre botones
+    private float spacing = 40f;
 
     public MenuScreen(Game game) {
         this.game = game;
@@ -51,11 +48,11 @@ public class MenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // 1) Limpiar pantalla
+        // 1) Limpiamos pantalla
         Gdx.gl.glClearColor(0, 0, 0, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // 2) Dibujar botón JUGAR
+        // 2) Dibujamos botón JUGAR
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(playButtonBounds.x, playButtonBounds.y, playButtonBounds.width, playButtonBounds.height);
@@ -63,13 +60,12 @@ public class MenuScreen implements Screen {
 
         batch.begin();
         layout.setText(font, playButtonText);
-        // Centrar texto en el botón
         float playTextX = playButtonBounds.x + (playButtonBounds.width - layout.width) / 2f;
         float playTextY = playButtonBounds.y + (playButtonBounds.height + layout.height) / 2f;
         font.draw(batch, layout, playTextX, playTextY);
         batch.end();
 
-        // 3) Dibujar botón SALIR debajo
+        // 3) Dibujamos botón SALIR debajo
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(exitButtonBounds.x, exitButtonBounds.y, exitButtonBounds.width, exitButtonBounds.height);
@@ -83,10 +79,9 @@ public class MenuScreen implements Screen {
         font.draw(batch, layout, exitTextX, exitTextY);
         batch.end();
 
-        // 4) Manejo de input táctil
+        // 4)input táctil
         if (Gdx.input.justTouched()) {
             Vector3 touch = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            // Ajuste de coordenada Y
             touch.y = Gdx.graphics.getHeight() - touch.y;
 
             if (playButtonBounds.contains(touch.x, touch.y)) {
@@ -102,7 +97,7 @@ public class MenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // Calcula tamaño y posición de botones centrados
+        // Calculamos tamaño y posición de botones centrados
         layout.setText(font, playButtonText);
         float btnW = layout.width + padding * 2;
         float btnH = layout.height + padding * 2;
@@ -110,7 +105,7 @@ public class MenuScreen implements Screen {
         float playY = height / 2f - btnH / 2f;
 
         playButtonBounds.set(centerX, playY, btnW, btnH);
-        // Posicionar SALIR debajo de JUGAR con spacing adicional
+        // Posicionamos SALIR debajo de JUGAR con spacing adicional
         float exitY = playY - btnH - spacing;
         exitButtonBounds.set(centerX, exitY, btnW, btnH);
     }

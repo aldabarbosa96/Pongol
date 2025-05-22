@@ -19,7 +19,7 @@ public class Pelota {
         hitbox = new Circle(sprite.getX() + sprite.getOriginX(), sprite.getY() + sprite.getOriginY(), Math.min(width, height) / 2f);
     }
 
-    // Actualiza posición, tamaño y origen
+    // Actualizamos posición, tamaño y origen
     public void setBounds(float x, float y, float width, float height) {
         sprite.setSize(width, height);
         sprite.setOrigin(width / 2f, height / 2f);
@@ -31,16 +31,6 @@ public class Pelota {
         return sprite.getBoundingRectangle();
     }
 
-    public Circle getHitbox() {
-        return hitbox;
-    }
-
-    public void setPosition(float x, float y) {
-        sprite.setPosition(x, y);
-        updateHitbox();
-    }
-
-    // Rota la sprite y actualiza el hitbox
     public void rotate(float degrees) { // todo --> valorar si hacemos que rote en un futuro
         sprite.rotate(degrees);
         updateHitbox();
@@ -56,12 +46,18 @@ public class Pelota {
         hitbox.setPosition(cx, cy);
         hitbox.setRadius(Math.min(sprite.getWidth(), sprite.getHeight()) / 2f);
     }
+
     public Texture getTexture() {
         return sprite.getTexture();
     }
 
-    public void setColor(Color c) { sprite.setColor(c); }
-    public Color getColor() { return sprite.getColor(); }
+    public void setColor(Color c) {
+        sprite.setColor(c);
+    }
+
+    public Color getColor() {
+        return sprite.getColor();
+    }
 
     public Sprite getSprite() {
         return sprite;

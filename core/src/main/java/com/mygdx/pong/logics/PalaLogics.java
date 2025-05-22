@@ -50,7 +50,7 @@ public class PalaLogics {
             }
         }
 
-        // Temporizador de enlarge
+        // Temporizador ensanchamiento
         if (widthTimer > 0f) {
             widthTimer -= delta;
             if (widthTimer <= 0f) {
@@ -58,7 +58,7 @@ public class PalaLogics {
             }
         }
 
-        // Temporizador de espejo
+        // Temporizador espejo
         if (mirrorTimer > 0f) {
             mirrorTimer -= delta;
             if (mirrorTimer <= 0f) {
@@ -71,21 +71,16 @@ public class PalaLogics {
         }
     }
 
-    /**
-     * Agranda la pala durante <duration> segundos
-     */
     public void enlargePaddle(float factor, float duration, Color color) {
         pala.getSprite().setSize(defaultWidth * factor, pala.getBounds().height);
         widthTimer = duration;
         setTemporaryColor(color, duration);
     }
 
-
     public void mirrorControls(float duration, Color color) {
         mirrorTimer = duration;
         setTemporaryColor(color, duration);
     }
-
 
     private void setTemporaryColor(Color c, float duration) {
         pala.setColor(c);

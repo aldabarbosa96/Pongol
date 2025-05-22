@@ -1,4 +1,3 @@
-// core/src/main/java/com/mygdx/pong/logics/PelotaLogics.java
 package com.mygdx.pong.logics;
 
 import com.badlogic.gdx.Gdx;
@@ -171,7 +170,6 @@ public class PelotaLogics {
             pelota.getSprite().setColor(defaultColor);
         }
 
-        // —— Añadir posición al trail ——
         float cx = b.x + b.width / 2f;
         float cy = b.y + b.height / 2f;
         trailPositions.add(new Vector2(cx, cy));
